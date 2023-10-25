@@ -13,6 +13,9 @@ app.use(morgan("dev"));
 app.use(cors());
 connectDB();
 
+// use routes
+app.use("/packages", require("./route/packageRoute"));
+
 app.get("/", (req, res) => {
   res.status(200).json({ message: `Server listening on port ${port}` });
 });
