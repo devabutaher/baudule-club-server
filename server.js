@@ -14,6 +14,7 @@ app.use(cors());
 connectDB();
 
 // use routes
+app.use("/categories", require("./route/categoryRoute"));
 app.use("/packages", require("./route/packageRoute"));
 
 app.get("/", (req, res) => {
