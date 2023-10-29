@@ -1,29 +1,35 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const packageSchema = new Schema({
-  location: {
+// package name
+// categories
+// division
+// duration
+// minimum members
+// maximum members
+// tour location
+// pickup location
+// description
+// price
+// availability
+// inclusions
+// exclusions
+// meals
+// cover picture
+// images
+// reviews
+// offers
+// additional
+// map url
+
+const packageSchema = Schema({
+  name: {
     type: String,
     required: true,
+    unique: true,
   },
-  coverimg: {
-    type: String,
-    required: true,
-  },
-  pickup: {
-    type: String,
-    required: true,
-  },
-  minmember: {
-    type: Number,
-    required: true,
-  },
-  maxmember: {
-    type: Number,
-    required: true,
-  },
-  amount: {
-    type: Number,
+  categories: {
+    type: [String],
     required: true,
   },
   division: {
@@ -34,88 +40,70 @@ const packageSchema = new Schema({
     type: Number,
     required: true,
   },
-  information: [
-    {
-      desc: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  inorexclu: [
-    {
-      in: [
-        {
-          type: String,
-          required: true,
-        },
-      ],
-      out: [
-        {
-          type: String,
-          required: true,
-        },
-      ],
-    },
-  ],
-  description: [
-    {
-      desc: {
-        type: String,
-        required: true,
-      },
-      facilitated: [
-        {
-          type: String,
-          required: true,
-        },
-      ],
-      hopdestination: [
-        {
-          type: String,
-          required: true,
-        },
-      ],
-      food: {
-        welcome: {
-          type: String,
-          required: true,
-        },
-        lunch: {
-          type: String,
-          required: true,
-        },
-        evening: {
-          type: String,
-          required: true,
-        },
-      },
-    },
-  ],
-  additional: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  tips: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  images: [
-    {
-      img: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  mapURL: {
-    type: String,
-    required: true,
-  },
+  // minimumMembers: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // maximumMembers: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // tourLocation: {
+  //   type: String,
+  //   required: true,
+  // },
+  // pickupLocation: {
+  //   type: String,
+  //   required: true,
+  // },
+  // description: {
+  //   type: String,
+  //   required: true,
+  // },
+  // price: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // availability: {
+  //   type: Boolean,
+  //   required: true,
+  // },
+  // inclusions: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // exclusions: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // meals: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // coverPic: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // images: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // reviews: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // offers: {
+  //   type: [String],
+  //   required: true,
+  // },
+  // additional: {
+  //   type: String,
+  //   required: true,
+  // },
+  // mapUrl: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
 const Package = mongoose.model("Package", packageSchema);

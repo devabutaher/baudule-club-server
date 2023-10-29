@@ -1,12 +1,9 @@
 const Error = require("http-errors");
 
 const errorHandler = (error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    status: error.status,
-    message: error.message,
-    stack: error.stack,
-  });
+  const status = error.status || 500;
+  const message = error.message || "Internal Server Error";
+  res.status(status).json({ status, message });
 };
 
 const errorRouter = (req, res, next) => {
