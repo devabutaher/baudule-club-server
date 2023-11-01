@@ -8,7 +8,7 @@ icon
 image
 */
 
-const categorySchema = Schema({
+const categorySchema = new Schema({
   // catId: {
   //   type: Number,
   //   required: true,
