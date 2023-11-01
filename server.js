@@ -22,8 +22,8 @@ app.get("/", (req, res) => {
 });
 
 // use error handler
-app.use(errorHandler);
 app.use(errorRouter);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

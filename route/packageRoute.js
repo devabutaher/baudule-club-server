@@ -8,7 +8,11 @@ const {
   createPackage,
 } = require("../controller/packageController");
 
-router.get("/", getAllPackages, createPackage);
-router.get("/:id", getPackageById, updatePackage, deletePackage);
+router.route("/").get(getAllPackages).post(createPackage);
+router
+  .route("/:id")
+  .get(getPackageById)
+  .put(updatePackage)
+  .delete(deletePackage);
 
 module.exports = router;

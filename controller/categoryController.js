@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Error = require("http-errors");
 const Category = require("../model/categoryModel");
-const validateCategories = require("../utils/validateCategory");
+const validateCategory = require("../utils/validateCategory");
 
 // get all categories
 const getAllCategories = asyncHandler(async (req, res) => {
@@ -17,7 +17,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
 // create category
 const createCategory = asyncHandler(async (req, res) => {
   // category validation
-  validateCategories(req.body);
+  validateCategory(req.body);
 
   // category exists
   const categoryExists = await Category.findOne(req.body);
