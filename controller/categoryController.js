@@ -11,7 +11,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
     throw Error(404, "No categories found");
   }
 
-  res.status(200).json(categories);
+  res.status(200).json({ results: categories.length, data: categories });
 });
 
 // create category
@@ -30,6 +30,21 @@ const createCategory = asyncHandler(async (req, res) => {
   res.status(201).json(category);
 });
 
+const updateCategory = asyncHandler(async (req, res) => {
+  const categoryId = req.params.id;
+  const categoryData = req.body;
+
+  const category = await Category.findByIdAndUpdate(categoryId, categoryData, {
+    new: true,
+  });
+
+  if (!category) {
+    throw Error(404, "Category not found");
+  }
+
+  res.status(200).json(category);
+});
+
 // delete category
 const deleteCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);
@@ -46,5 +61,6 @@ const deleteCategory = asyncHandler(async (req, res) => {
 module.exports = {
   getAllCategories,
   createCategory,
+  updateCategory,
   deleteCategory,
 };
