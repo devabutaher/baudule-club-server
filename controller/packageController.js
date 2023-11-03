@@ -6,7 +6,10 @@ const validatePackage = require("../utils/validatePackage");
 // get all packages
 const getAllPackages = asyncHandler(async (req, res) => {
   const packages = await Package.find();
-  res.status(200).json(packages);
+  res.status(200).json({
+    results: packages.length,
+    data: packages,
+  });
 });
 
 // get package by id
