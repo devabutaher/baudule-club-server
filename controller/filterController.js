@@ -8,12 +8,14 @@ const filterPackages = asyncHandler(async (req, res) => {
   const filter = {};
 
   // filter packages by categories
-  const categoryArray = categories.split(",");
+  if (categories) {
+    const categoryArray = categories.split(",");
 
-  if (categoryArray.length === 1) {
-    filter.categories = categoryArray[0];
-  } else {
-    filter.categories = { $in: categoryArray };
+    if (categoryArray.length === 1) {
+      filter.categories = categoryArray[0];
+    } else {
+      filter.categories = { $in: categoryArray };
+    }
   }
 
   // filter packages by division
@@ -22,15 +24,22 @@ const filterPackages = asyncHandler(async (req, res) => {
   }
 
   // filter packages by duration
-  // const durationRange = duration.split("-");
-
   if (duration) {
-    filter.duration = { $lte: parseInt(duration) };
+    const [minDuration, maxDuration] = duration.split("-").map(Number);
+
+    if (!isNaN(minDuration) && !isNaN(maxDuration)) {
+      filter.duration = {
+        $gte: minDuration,
+        $lte: maxDuration,
+      };
+    } else {
+      throw Error(400, "Invalid duration range");
+    }
   }
 
   const filteredPackages = await Package.find(filter);
 
-  res.json({
+  res.status(200).json({
     results: filteredPackages.length,
     data: filteredPackages,
   });

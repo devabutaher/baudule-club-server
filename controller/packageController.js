@@ -3,15 +3,6 @@ const Package = require("../model/packageModel");
 const Error = require("http-errors");
 const validatePackage = require("../utils/validatePackage");
 
-// get all packages
-const getAllPackages = asyncHandler(async (req, res) => {
-  const packages = await Package.find();
-  res.status(200).json({
-    results: packages.length,
-    data: packages,
-  });
-});
-
 // get package by id
 const getPackageById = asyncHandler(async (req, res) => {
   const package = await Package.findById(req.params.id);
@@ -30,12 +21,14 @@ const createPackage = asyncHandler(async (req, res) => {
 
   // package exists
   const packageExists = await Package.findOne(req.body);
+
   if (packageExists) {
     throw Error(400, "Package already exists");
   }
 
   const package = await Package.create(req.body);
   await package.save();
+
   res.status(201).json(package);
 });
 
@@ -72,7 +65,6 @@ const deletePackage = asyncHandler(async (req, res) => {
 
 module.exports = {
   createPackage,
-  getAllPackages,
   getPackageById,
   updatePackage,
   deletePackage,
