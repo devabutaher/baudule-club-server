@@ -1,16 +1,21 @@
 /*
 
+localhost: http://localhost:5000/
+
+
+
 Categories
 
-Get all categories & Create = http://localhost:5000/categories
-Update & Delete = http://localhost:5000/categories/:id
+Get all categories & Create = categories
+Update & Delete = categories/:id
 
 
 
 Packages
 
-Get all packages & Create = http://localhost:5000/packages
-Get package by ID & Update & Delete = http://localhost:5000/packages/:id
-Filter packages by Categories & Division & Duration = http://localhost:5000/packages?categories=forest,beach&division=sylhet&duration=1-5
+Get all packages & Create = packages
+Get package by ID & Update & Delete = packages/:id
+
+Filter packages by Categories || Division || Duration || Page || Limit = packages?categories=historical,adventure&division=dhaka&duration=1-5&page=1&limit=5
 
 */

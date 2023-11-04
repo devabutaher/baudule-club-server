@@ -3,7 +3,7 @@ const Error = require("http-errors");
 const Package = require("../model/packageModel");
 
 const filterPackages = asyncHandler(async (req, res) => {
-  const { categories, division, duration } = req.query;
+  const { categories, division, duration, page, limit } = req.query;
 
   const filter = {};
 
@@ -37,7 +37,14 @@ const filterPackages = asyncHandler(async (req, res) => {
     }
   }
 
-  const filteredPackages = await Package.find(filter);
+  // filter by pagination
+  const skip = (page - 1) * limit;
+  const options = {
+    skip: skip,
+    limit: Number(limit),
+  };
+
+  const filteredPackages = await Package.find(filter, null, options);
 
   res.status(200).json({
     results: filteredPackages.length,
