@@ -14,6 +14,17 @@ const getAllCategories = asyncHandler(async (req, res) => {
   res.status(200).json(categories);
 });
 
+// get single category by id
+const getSingleCategory = asyncHandler(async (req, res) => {
+  const category = await Category.findById(req.params.id);
+
+  if (!category) {
+    throw Error("No category found");
+  }
+
+  res.status(200).json(category);
+});
+
 // create category
 const createCategory = asyncHandler(async (req, res) => {
   const categoryData = req.body;
@@ -68,6 +79,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
 
 module.exports = {
   getAllCategories,
+  getSingleCategory,
   createCategory,
   updateCategory,
   deleteCategory,
