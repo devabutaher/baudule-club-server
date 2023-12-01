@@ -30,7 +30,7 @@ const createPackage = asyncHandler(async (req, res) => {
 
   const package = await Package.create(packageData);
 
-  res.status(201).json(package);
+  res.status(201).json({ success: true, data: package });
 });
 
 // update package
@@ -41,20 +41,16 @@ const updatePackage = asyncHandler(async (req, res) => {
   // validate package
   validatePackage(packageData);
 
-  const updatedPackage = await Package.findByIdAndUpdate(
-    packageId,
-    packageData,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  const package = await Package.findByIdAndUpdate(packageId, packageData, {
+    new: true,
+    runValidators: true,
+  });
 
-  if (!updatedPackage) {
+  if (!package) {
     throw Error(404, "Package not found");
   }
 
-  res.status(200).json(updatedPackage);
+  res.status(200).json({ success: true, data: package });
 });
 
 // delete package
@@ -67,7 +63,7 @@ const deletePackage = asyncHandler(async (req, res) => {
 
   await package.deleteOne();
 
-  res.status(200).json(package);
+  res.status(200).json({ success: true, data: package });
 });
 
 module.exports = {

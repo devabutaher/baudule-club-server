@@ -30,9 +30,10 @@ const createCategory = asyncHandler(async (req, res) => {
 
   const category = await Category.create(categoryData);
 
-  res.status(201).json(category);
+  res.status(201).json({ success: true, data: category });
 });
 
+// update category
 const updateCategory = asyncHandler(async (req, res) => {
   const categoryId = req.params.id;
   const categoryData = req.body;
@@ -62,7 +63,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
 
   await category.deleteOne();
 
-  res.status(200).json(category);
+  res.status(200).json({ success: true, data: category });
 });
 
 module.exports = {

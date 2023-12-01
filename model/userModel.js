@@ -12,6 +12,12 @@ const userSchema = new Schema({
     unique: true,
   },
   number: {
+    type: String,
+  },
+  role: {
+    type: String,
+  },
+  totalTrip: {
     type: Number,
   },
 });

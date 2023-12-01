@@ -4,7 +4,7 @@ const Error = require("http-errors");
 
 // save the user
 const saveUser = asyncHandler(async (req, res) => {
-  const { name, email, number } = req.body;
+  const { name, email } = req.body;
 
   if (!name || !email) {
     throw Error("Please fill all the fields");
@@ -13,10 +13,12 @@ const saveUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
-    number,
+    number: "",
+    role: "user",
+    totalTrip: 0,
   });
 
-  res.status(201).json(user);
+  res.status(201).json({ success: true, data: user });
 });
 
 // get all users
@@ -43,9 +45,9 @@ const singleUser = asyncHandler(async (req, res) => {
 
 // update user info
 const updateUser = asyncHandler(async (req, res) => {
-  const { name, email, number } = req.body;
+  const { name, number, role, totalTrip } = req.body;
 
-  if (!name || !email) {
+  if (!name) {
     throw Error(400, "Please fill all the fields");
   }
 
@@ -55,8 +57,9 @@ const updateUser = asyncHandler(async (req, res) => {
     },
     {
       name,
-      email,
       number,
+      role,
+      totalTrip,
     },
     {
       new: true,
@@ -68,7 +71,7 @@ const updateUser = asyncHandler(async (req, res) => {
     throw Error(404, "User not found");
   }
 
-  res.status(200).json(user);
+  res.status(200).json({ success: true, data: user });
 });
 
 // delete user
@@ -81,7 +84,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   await user.deleteOne();
 
-  res.status(200).json(user);
+  res.status(200).json({ success: true, data: user });
 });
 
 module.exports = {
