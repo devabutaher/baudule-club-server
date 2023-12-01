@@ -16,18 +16,19 @@ const getPackageById = asyncHandler(async (req, res) => {
 
 // create package
 const createPackage = asyncHandler(async (req, res) => {
+  const packageData = req.body;
+
   // validate package
-  validatePackage(req.body);
+  validatePackage(packageData);
 
   // package exists
-  const packageExists = await Package.findOne(req.body);
+  const packageExists = await Package.findOne(packageData);
 
   if (packageExists) {
     throw Error(400, "Package already exists");
   }
 
-  const package = await Package.create(req.body);
-  await package.save();
+  const package = await Package.create(packageData);
 
   res.status(201).json(package);
 });
@@ -35,32 +36,38 @@ const createPackage = asyncHandler(async (req, res) => {
 // update package
 const updatePackage = asyncHandler(async (req, res) => {
   const packageId = req.params.id;
-  const updatePackageData = req.body;
+  const packageData = req.body;
 
-  const updatePackage = await Package.findByIdAndUpdate(
+  // validate package
+  validatePackage(packageData);
+
+  const updatedPackage = await Package.findByIdAndUpdate(
     packageId,
-    updatePackageData,
+    packageData,
     {
       new: true,
+      runValidators: true,
     }
   );
 
-  if (!updatePackage) {
+  if (!updatedPackage) {
     throw Error(404, "Package not found");
   }
 
-  res.status(200).json(updatePackage);
+  res.status(200).json(updatedPackage);
 });
 
 // delete package
 const deletePackage = asyncHandler(async (req, res) => {
-  const deletedPackage = await Package.findByIdAndDelete(req.params.id);
+  const package = await Package.findById(req.params.id);
 
-  if (!deletedPackage) {
+  if (!package) {
     throw Error(404, "Package not found");
   }
 
-  res.status(200).json(deletedPackage);
+  await package.deleteOne();
+
+  res.status(200).json(package);
 });
 
 module.exports = {

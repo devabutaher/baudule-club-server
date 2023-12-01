@@ -11,22 +11,25 @@ const getAllCategories = asyncHandler(async (req, res) => {
     throw Error(404, "No categories found");
   }
 
-  res.status(200).json({ results: categories.length, data: categories });
+  res.status(200).json(categories);
 });
 
 // create category
 const createCategory = asyncHandler(async (req, res) => {
+  const categoryData = req.body;
+
   // category validation
-  validateCategory(req.body);
+  validateCategory(categoryData);
 
   // category exists
-  const categoryExists = await Category.findOne(req.body);
+  const categoryExists = await Category.findOne(categoryData);
+
   if (categoryExists) {
     throw Error(400, "Category already exists");
   }
 
-  const category = await Category.create(req.body);
-  await category.save();
+  const category = await Category.create(categoryData);
+
   res.status(201).json(category);
 });
 
@@ -34,8 +37,12 @@ const updateCategory = asyncHandler(async (req, res) => {
   const categoryId = req.params.id;
   const categoryData = req.body;
 
+  // category validation
+  validateCategory(categoryData);
+
   const category = await Category.findByIdAndUpdate(categoryId, categoryData, {
     new: true,
+    runValidators: true,
   });
 
   if (!category) {
@@ -53,7 +60,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
     throw Error("Cannot find category");
   }
 
-  await Category.delete(category);
+  await category.deleteOne();
 
   res.status(200).json(category);
 });

@@ -46,10 +46,7 @@ const filterPackages = asyncHandler(async (req, res) => {
 
   const filteredPackages = await Package.find(filter, null, options);
 
-  res.status(200).json({
-    results: filteredPackages.length,
-    data: filteredPackages,
-  });
+  res.status(200).json(filteredPackages);
 });
 
 module.exports = filterPackages;

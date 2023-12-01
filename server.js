@@ -16,6 +16,7 @@ connectDB();
 // use routes
 app.use("/categories", require("./route/categoryRoute"));
 app.use("/packages", require("./route/packageRoute"));
+app.use("/users", require("./route/userRoute"));
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: `Server listening on port ${port}` });
