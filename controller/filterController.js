@@ -44,9 +44,10 @@ const filterPackages = asyncHandler(async (req, res) => {
     limit: Number(limit),
   };
 
-  const filteredPackages = await Package.find(filter, null, options);
+  const data = await Package.find(filter, null, options);
+  const total = await Package.countDocuments();
 
-  res.status(200).json(filteredPackages);
+  res.status(200).json({ total, data });
 });
 
 module.exports = filterPackages;

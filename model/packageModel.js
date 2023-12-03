@@ -40,70 +40,53 @@ const packageSchema = Schema({
     type: Number,
     required: true,
   },
-  // minimumMembers: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // maximumMembers: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // tourLocation: {
-  //   type: String,
-  //   required: true,
-  // },
-  // pickupLocation: {
-  //   type: String,
-  //   required: true,
-  // },
-  // description: {
-  //   type: String,
-  //   required: true,
-  // },
-  // price: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // availability: {
-  //   type: Boolean,
-  //   required: true,
-  // },
-  // inclusions: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // exclusions: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // meals: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // coverPic: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // images: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // reviews: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // offers: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // additional: {
-  //   type: String,
-  //   required: true,
-  // },
-  // mapUrl: {
-  //   type: String,
-  //   required: true,
-  // },
+  minimumMembers: {
+    type: Number,
+  },
+  maximumMembers: {
+    type: Number,
+  },
+  tourLocation: {
+    type: String,
+    required: true,
+  },
+  pickupLocation: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  availability: {
+    type: Boolean,
+  },
+  inclusions: {
+    type: [String],
+  },
+  exclusions: {
+    type: [String],
+  },
+  meals: {
+    type: [String],
+  },
+  coverPic: {
+    type: String,
+    required: true,
+  },
+  images: {
+    type: [String],
+    required: true,
+  },
+  reviews: {
+    type: [String],
+  },
+  mapUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 const Package = mongoose.model("Package", packageSchema);
