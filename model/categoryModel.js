@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-/*
-title
-subtitle
-icon
-image
-*/
-
 const categorySchema = new Schema({
   title: {
     type: String,
