@@ -33,7 +33,7 @@ const createCategory = asyncHandler(async (req, res) => {
   validateCategory(categoryData);
 
   // category exists
-  const categoryExists = await Category.findOne(categoryData);
+  const categoryExists = await Category.findOne({ title: categoryData.title });
 
   if (categoryExists) {
     throw Error(400, "Category already exists");
@@ -61,7 +61,7 @@ const updateCategory = asyncHandler(async (req, res) => {
     throw Error(404, "Category not found");
   }
 
-  res.status(200).json(category);
+  res.status(200).json({ success: true, data: category });
 });
 
 // delete category

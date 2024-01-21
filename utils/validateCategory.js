@@ -1,8 +1,8 @@
 const Error = require("http-errors");
 
 const validateCategory = (data) => {
-  const { title } = data;
-  if (!title) {
+  const { title, icon } = data;
+  if ((!title, !icon)) {
     throw Error(400, "Please fill all fields");
   }
 };
