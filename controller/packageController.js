@@ -22,13 +22,13 @@ const createPackage = asyncHandler(async (req, res) => {
   validatePackage(packageData);
 
   // package exists
-  const packageExists = await Package.findOne(packageData);
+  const packageExists = await Package.findOne({ name: packageData.name });
 
   if (packageExists) {
     throw Error(400, "Package already exists");
   }
 
-  const package = await Package.create(packageData);
+  const package = await Package.create({ ...packageData, availability: true });
 
   res.status(201).json({ success: true, data: package });
 });
