@@ -7,15 +7,7 @@ const categorySchema = new Schema({
     required: true,
     unique: true,
   },
-  subtitle: {
-    type: String,
-    required: true,
-  },
   icon: {
-    type: String,
-    required: true,
-  },
-  img: {
     type: String,
     required: true,
   },
