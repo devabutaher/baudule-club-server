@@ -23,7 +23,11 @@ const packageSchema = Schema({
     type: String,
     required: true,
   },
-  duration: {
+  minDuration: {
+    type: Number,
+    required: true,
+  },
+  maxDuration: {
     type: Number,
     required: true,
   },
@@ -31,35 +35,90 @@ const packageSchema = Schema({
     type: Number,
     required: true,
   },
+  childPrice: {
+    type: Number,
+    required: true,
+  },
   minMembers: {
     type: Number,
+    required: true,
   },
   maxMembers: {
     type: Number,
+    required: true,
   },
   description: {
     type: String,
+    required: true,
   },
+  information: {
+    type: String,
+    required: true,
+  },
+  facilities: {
+    type: [String],
+    required: true,
+  },
+  hopeDestination: {
+    type: [String],
+    required: true,
+  },
+  meals: [
+    {
+      welcome: {
+        type: [String],
+        required: true,
+      },
+    },
+    {
+      lunch: {
+        type: [String],
+        required: true,
+      },
+    },
+    {
+      evening: {
+        type: [String],
+        required: true,
+      },
+    },
+  ],
   mapUrl: {
     type: String,
     required: true,
   },
   availability: {
     type: Boolean,
+    required: true,
   },
-  // inclusions: {
-  //   type: [String],
-  // },
-  // exclusions: {
-  //   type: [String],
-  // },
-  // images: {
-  //   type: [String],
-  //   required: true,
-  // },
-  // reviews: {
-  //   type: [String],
-  // },
+  inclusions: {
+    type: [String],
+    required: true,
+  },
+  exclusions: {
+    type: [String],
+    required: true,
+  },
+  tips: {
+    type: [String],
+    required: true,
+  },
+  pickLocation: {
+    type: [String],
+    required: true,
+  },
+  coverPic: {
+    type: String,
+    required: true,
+  },
+  images: {
+    type: [String],
+    required: true,
+  },
+  additionalInfo: {
+    type: [String],
+    required: true,
+  },
 });
 
 const Package = mongoose.model("Package", packageSchema);
