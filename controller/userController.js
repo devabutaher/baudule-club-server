@@ -16,7 +16,7 @@ const saveUser = asyncHandler(async (req, res) => {
     number: "",
     address: "",
     role: "user",
-    description: ""
+    description: "",
     bookingPackages: [],
   });
 

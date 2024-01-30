@@ -22,15 +22,15 @@ const userSchema = new Schema(
       type: String,
     },
     bookingPackages: {
-      type: [String]
-    }
+      type: [String],
+    },
     description: {
       type: String,
     },
   },
   {
-    timestamps: true
-  },
+    timestamps: true,
+  }
 );
 
 const User = mongoose.model("User", userSchema);
