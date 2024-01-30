@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Error = require("http-errors");
 const Category = require("../model/categoryModel");
-const validateCategory = require("../utils/validateCategory");
 
 // get all categories
 const getAllCategories = asyncHandler(async (req, res) => {
@@ -29,9 +28,6 @@ const getSingleCategory = asyncHandler(async (req, res) => {
 const createCategory = asyncHandler(async (req, res) => {
   const categoryData = req.body;
 
-  // category validation
-  validateCategory(categoryData);
-
   // category exists
   const categoryExists = await Category.findOne({ title: categoryData.title });
 
@@ -48,9 +44,6 @@ const createCategory = asyncHandler(async (req, res) => {
 const updateCategory = asyncHandler(async (req, res) => {
   const categoryId = req.params.id;
   const categoryData = req.body;
-
-  // category validation
-  validateCategory(categoryData);
 
   const category = await Category.findByIdAndUpdate(categoryId, categoryData, {
     new: true,

@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Package = require("../model/packageModel");
 const Error = require("http-errors");
-const validatePackage = require("../utils/validatePackage");
 
 // get package by id
 const getPackageById = asyncHandler(async (req, res) => {
@@ -17,9 +16,6 @@ const getPackageById = asyncHandler(async (req, res) => {
 // create package
 const createPackage = asyncHandler(async (req, res) => {
   const packageData = req.body;
-
-  // validate package
-  validatePackage(packageData);
 
   // package exists
   const packageExists = await Package.findOne({ name: packageData.name });
@@ -37,9 +33,6 @@ const createPackage = asyncHandler(async (req, res) => {
 const updatePackage = asyncHandler(async (req, res) => {
   const packageId = req.params.id;
   const packageData = req.body;
-
-  // validate package
-  validatePackage(packageData);
 
   const package = await Package.findByIdAndUpdate(packageId, packageData, {
     new: true,
