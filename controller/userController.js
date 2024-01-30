@@ -14,8 +14,10 @@ const saveUser = asyncHandler(async (req, res) => {
     name,
     email,
     number: "",
+    address: "",
     role: "user",
-    totalTrip: 0,
+    description: "",
+    bookingPackages: [],
   });
 
   res.status(201).json({ success: true, data: user });
@@ -45,7 +47,7 @@ const singleUser = asyncHandler(async (req, res) => {
 
 // update user info
 const updateUser = asyncHandler(async (req, res) => {
-  const { name, number, role, totalTrip } = req.body;
+  const { name, number, role, address, description } = req.body;
 
   if (!name) {
     throw Error(400, "Please fill all the fields");
@@ -59,7 +61,8 @@ const updateUser = asyncHandler(async (req, res) => {
       name,
       number,
       role,
-      totalTrip,
+      address,
+      description,
     },
     {
       new: true,
